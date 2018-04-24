@@ -33,6 +33,10 @@ Provide guidance for monitoring of Kubernetes and Kubernetes workloads on Azure.
    - Dashboards
    - Setup metrics (i.e. counters, gauges, etc.)
    - How do you graph those?
+- Storage
+  - Sizing correctly? What happens when space runs out?
+  - How to prune?
+  - What are good approaches to take for production workloads and how should they be managed over time?
 
 ### OMS
 
