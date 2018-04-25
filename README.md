@@ -81,3 +81,9 @@ helm install stable/kibana
 - When do we aggregate? 
 - How to configure capture of logs with a specific warning/error level? Can those get prioritized over INFO/DEBUG? Do those
 - Alerting based on logs. Why do this vs metrics? Do we prefer metrics (probably?)?
+
+
+# References
+
+https://github.com/kubernetes/community/blob/master/contributors/design-proposals/instrumentation/monitoring_architecture.md
+https://banzaicloud.com/blog/k8s-logging-advanced/
