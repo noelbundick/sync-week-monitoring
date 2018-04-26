@@ -213,9 +213,10 @@ NOTES:
 You can create your own dashboard or import an existing dashboard. To import an existing dashboard from Grafana:
 1. Go to https://grafana.com/dashboards
 2. Find the dashboard you would like to use
-    a. In our example, we will use https://grafana.com/dashboards/315
-3. Log into Grafana console
-4. Click on the Plus sign on left side of dashboard and then click Import.
+
+   a. In our example, we will use https://grafana.com/dashboards/1471
+1. Log into Grafana console
+2. Click on the Plus sign on left side of dashboard and then click Import.
 
    ![Import Dashboard](images/grafana-import-dashboard.png)
 
@@ -223,5 +224,6 @@ You can create your own dashboard or import an existing dashboard. To import an 
 
    ![Load Dashboard](images/grafana-load-dashboard.png)
 
-6. 
-2. 
+6. Select the database source and click Import
+
+   ![Import Dashboard](images/grafana-complete-import.png)
