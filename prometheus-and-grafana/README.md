@@ -19,6 +19,9 @@ kubectl create namespace monitor
 
 # Install cAdvisor ?
 
+```
+kubectl apply -f cadvisor_daemonset.yaml --namespace monitor
+```
 
 # Install Prometheus
 
@@ -137,7 +140,7 @@ https://prometheus.io/
 
 # Install Grafana
 
-helm install stable/grafana
+TODO: ensure storage class is managed premium
 
 ```
 helm install --name grafana stable/grafana --version 1.2.0 --namespace monitor \
