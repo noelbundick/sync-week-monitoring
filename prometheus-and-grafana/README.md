@@ -198,8 +198,30 @@ NOTES:
 
    Get the Grafana URL to visit by running these commands in the same shell:
 
-     export POD_NAME=$(kubectl get pods --namespace monitor -l "app=grafana,component=" -o jsonpath="{.items[0].metadata.name}")
+     export POD_NAME=$(kubectl get pods --namespace monitor -l "app=grafana" -o jsonpath="{.items[0].metadata.name}")
      kubectl --namespace monitor port-forward $POD_NAME 3000
 
 3. Login with the password from step 1 and the username: grafana
 ```
+
+# Configure Grafana for Prometheus
+
+## Add Data Source
+
+## Import Dashboard
+
+You can create your own dashboard or import an existing dashboard. To import an existing dashboard from Grafana:
+1. Go to https://grafana.com/dashboards
+2. Find the dashboard you would like to use
+    a. In our example, we will use https://grafana.com/dashboards/315
+3. Log into Grafana console
+4. Click on the Plus sign on left side of dashboard and then click Import.
+
+   ![Import Dashboard](images/grafana-import-dashboard.png)
+
+5. Enter the dashboard number and click Load
+
+   ![Load Dashboard](images/grafana-load-dashboard.png)
+
+6. 
+2. 
