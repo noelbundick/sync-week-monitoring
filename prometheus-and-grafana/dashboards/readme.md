@@ -1,0 +1,1 @@
+These fanstasic dashboards were taken from the [Kube-Prometheus](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus) operator [here](https://github.com/coreos/prometheus-operator/blob/master/contrib/kube-prometheus/manifests/grafana/grafana-dashboard-definitions.yaml).
