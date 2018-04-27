@@ -140,7 +140,20 @@ https://prometheus.io/
 
 # Install Grafana
 
-TODO: ensure storage class is managed premium
+TODO:  Correct Helm docs for Grafana
+
+1. Value param
+
+   persistence.StorageClass
+   should be:
+   persistence.StorageClassName
+
+2. Output help
+
+   export POD_NAME=$(kubectl get pods --namespace monitor -l "app=grafana,component=" -o jsonpath="{.items[0].metadata.name}")
+   should be:
+   export POD_NAME=$(kubectl get pods --namespace monitor -l "app=grafana" -o jsonpath="{.items[0].metadata.name}")
+
 
 ```
 helm install --name grafana stable/grafana --version 1.2.0 --namespace monitor \
@@ -198,7 +211,7 @@ NOTES:
 
    Get the Grafana URL to visit by running these commands in the same shell:
 
-     export POD_NAME=$(kubectl get pods --namespace monitor -l "app=grafana,component=" -o jsonpath="{.items[0].metadata.name}")
+     export POD_NAME=$(kubectl get pods --namespace monitor -l "app=grafana" -o jsonpath="{.items[0].metadata.name}")
      kubectl --namespace monitor port-forward $POD_NAME 3000
 
 3. Login with the password from step 1 and the username: grafana
