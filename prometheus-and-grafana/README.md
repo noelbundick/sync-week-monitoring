@@ -1,12 +1,31 @@
 # References
 
 https://github.com/kubernetes/charts/tree/master/stable/prometheus
+https://github.com/kubernetes/charts/tree/master/stable/grafana
 https://github.com/timfpark/k8s-prom-grafana/blob/master/prometheus/deploy
+https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus
+https://github.com/grafana/kubernetes-app
+https://github.com/grafana/azure-monitor-datasource
+
+## Prometheus Operator and kube-prometheus
+
+The Prometheus Operator makes the Prometheus configuration Kubernetes native and manages and operates Prometheus and Alertmanager clusters. It is a piece of the puzzle regarding full end-to-end monitoring. kube-prometheus combines the Prometheus Operator with a collection of manifests to help getting started with monitoring Kubernetes itself and applications running on top of it.
+
+These look good (except for lack of pvc for alert manager and prometheus), but cadvisor still needs to be installed separately.
+
+## Kubernetes App (Grafana)
+
+The kubernetes app from the Grafana repo is a plugin that provides datasource, dashboards and drill downs for your kubernetes cluster. It asks for api-server access which we don't think is a good option. Worth looking at items we can leverage but not sure it is a good option to use.
+
+## Notes 
+
+acs-engine - should have option to install cadvisor.
 
 # Pre-requisites for Kubernetes Cluster
 
 - RBAC enabled (so no AKS until it is GA)
 - Network Policy enabled CNI installed (Calico for now, Azure CNI does not support network policy yet)
+- Managed Disk support (VM and Kubernetes Storage Class)
 - Prometheus and Grafana will not be publically exposed
 - cAdvisor must be installed to get container metrics - this will be installed manually for now.
 - Helm installed
@@ -17,21 +36,39 @@ https://github.com/timfpark/k8s-prom-grafana/blob/master/prometheus/deploy
 kubectl create namespace monitor
 ```
 
-# Install cAdvisor ?
+# Install cAdvisor
+
+cadvisor is required to deliver container metrics.
 
 ```
-kubectl apply -f cadvisor_daemonset.yaml --namespace monitor
+# use apiVersion: apps/v1beta2 for 1.8 clusters
+# user apiVersion: apps/v1 for 1.9 clusters
+
+
+kubectl apply -f cadvisor_daemonset.yaml --namespace kube-system
 ```
 
 # Install Prometheus
 
+Install via the Helm chart. 
+
+Larger disks have been leveraged to obtain better iops. 
+Additional configuration around alert rules, retention policies are to be explored - will have to start using a values.yaml file since it is not feasible to set some of these complex values via the `--set` options.
+
 ```
+# acs-engine
+
 helm install --name prometheus stable/prometheus --version 6.2.1 --namespace monitor \
   --set alertmanager.persistentVolume.storageClass=managed-premium \
   --set alertmanager.persistentVolume.size=128Gi \
   --set server.persistentVolume.storageClass=managed-premium \
   --set server.persistentVolume.size=128Gi \
   --set networkPolicy.enabled=true
+
+# aks
+
+
+
 ```
 
 Output 
